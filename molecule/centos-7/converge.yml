@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: christiangda.epel_repo
+      vars:
+        epel_enable_redhat_extras_repos: false

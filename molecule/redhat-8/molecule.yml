@@ -13,8 +13,8 @@ verifier:
   name: ansible
 
 scenario:
-  name: default
+  name: redhat-8
 
 platforms:
-  - name: centos-8
-    image: centos:8
+  - name: redhat-8
+    image: registry.access.redhat.com/ubi8/ubi
