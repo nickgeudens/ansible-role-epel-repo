@@ -1,6 +1,7 @@
 # Ansible Role: christiangda.epel_repo
 
-[![Build Status](https://travis-ci.org/christiangda/ansible-role-epel-repo.svg?branch=master)](https://travis-ci.org/christiangda/ansible-role-epel-repo)
+[![Master branch workflow](https://github.com/christiangda/ansible-role-epel-repo/actions/workflows/master.yaml/badge.svg?branch=master)](https://github.com/christiangda/ansible-role-epel-repo/actions/workflows/master.yaml)
+[![Develop branch workflow](https://github.com/christiangda/ansible-role-epel-repo/actions/workflows/develop.yaml/badge.svg?branch=develop)](https://github.com/christiangda/ansible-role-epel-repo/actions/workflows/develop.yaml)
 [![Ansible Role](https://img.shields.io/ansible/role/33302.svg)](https://galaxy.ansible.com/christiangda/epel_repo)
 
 This role [install EPEL Repository](https://fedoraproject.org/wiki/EPEL)
