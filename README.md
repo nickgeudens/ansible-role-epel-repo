@@ -29,9 +29,9 @@ To see the compatibility matrix of Python vs. Ansible see the project [Travis-CI
 
 ## Role Variables
 
-| Variable                        | Default Value           |
-| :-------------------------      | :---------------------- |
-| epel_enable_redhat_extras_repos | false                   |
+| Variable                        | Default Value |
+| :------------------------------ | :------------ |
+| epel_enable_redhat_extras_repos | false         |
 
 **More Details:** See the file [defaults/main.yaml](defaults/main.yaml)
 
@@ -102,7 +102,25 @@ ansible-playbook my-playbook.yml \
 This role is tested using [Molecule](https://molecule.readthedocs.io/en/latest/) and was developed using
 [Python Virtual Environments](https://docs.python.org/3/tutorial/venv.html)
 
-Prepare your environment
+Also, we used to main git branch
+
+* master
+* develop
+
+If you want to contribute to this project what you want to do is
+
+* [Fork the project](https://help.github.com/en/github/getting-started-with-github/fork-a-repo)
+* [Prepare your environment](#prepare-your-environment)
+* Fix the problem in `develop` branch
+* Execute `molecule test`
+* Create a Pull Request to official project `develop` branch
+
+References
+
+* [Fork a repo](https://help.github.com/en/github/getting-started-with-github/fork-a-repo)
+* [Creating a pull request from a fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork)
+
+### Prepare your environment
 
 * Python 3
 
@@ -115,6 +133,11 @@ source venv/bin/activate
 pip install pip --upgrade
 pip install ansible
 pip install molecule
+pip install 'molecule[docker]'
+pip install 'molecule[podman]'
+pip install 'molecule[lint]'
+pip install molecule-vagrant
+pip install python-vagrant
 pip install selinux
 pip install docker
 pip install pytest
@@ -124,30 +147,46 @@ pip install rope
 pip install autopep8
 pip install yamllint
 pip install flake8
+pip install ansible-lint
 ```
 
-Clone the role repository and create symbolic link
+### Clone the role repository (From your fork) and create symbolic link
 
 ```bash
 git clone https://github.com/christiangda/ansible-role-epel-repo.git
-ln -s ansible-role-epel-repo christiangda.epel_repo
-cd ansible-role-epel-repo
+ln -s ansible-role-awscli-configure christiangda.epel_repo
+cd christiangda.epel_repo
 ```
 
-Execute the test
+### Execute the molecule test
 
-Using docker in local
+Scenarios available:
+
+* default --> `--driver-name docker`
+* amazonlinux-1 --> `--driver-name docker`
+* amazonlinux-2 --> `--driver-name docker`
+* centos-8 --> `--driver-name docker`
+* centos-7 --> `--driver-name docker`
+* redhat-7 --> `--driver-name docker`
+* redhat-8 --> `--driver-name docker`
+
+#### scenario default
+
+Step by step
 
 ```bash
-molecule create
-molecule converge
-molecule verify
+molecule create [--scenario-name default]
+molecule converge [--scenario-name default]
+molecule verify [--scenario-name default]
+molecule destroy [--scenario-name default]
 ```
 
 or
 
+All in one
+
 ```bash
-molecule test
+molecule test [--scenario-name default]
 ```
 
 **Additionally if you want to test it using VMs, I have a very nice [ansible-playground project](https://github.com/christiangda/ansible-playground) that use Vagrant and VirtualBox, try it!.**
