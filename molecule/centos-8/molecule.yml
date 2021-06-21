@@ -18,7 +18,3 @@ scenario:
 platforms:
   - name: centos-8
     image: centos:8
-
-platforms:
-  - name: centos-8
-    image: centos:8
