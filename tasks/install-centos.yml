@@ -11,9 +11,8 @@
   when: >
     not epel_repo_file_path_result.stat.exists and
     ansible_os_family == 'RedHat' and (
-      ansible_distribution == 'RedHat'
+      ansible_distribution == 'CentOS'
     ) and (
-      ansible_distribution_major_version == '8' or
       ansible_distribution_major_version == '7' or
       ansible_distribution_major_version == '6'
     )
@@ -28,9 +27,8 @@
   when: >
     not epel_repo_file_path_result.stat.exists and
     ansible_os_family == 'RedHat' and (
-      ansible_distribution == 'RedHat'
+      ansible_distribution == 'CentOS'
     ) and (
-      ansible_distribution_major_version == '8' or
       ansible_distribution_major_version == '7' or
       ansible_distribution_major_version == '6'
     )
@@ -44,41 +42,12 @@
   when: >
     not epel_repo_file_path_result.stat.exists and
     ansible_os_family == 'RedHat' and (
-      ansible_distribution == 'RedHat'
+      ansible_distribution == 'CentOS'
     ) and (
       ansible_distribution_major_version == '8' or
       ansible_distribution_major_version == '7' or
       ansible_distribution_major_version == '6'
     )
-
-# Only for RedHat 7
-# reference: https://fedoraproject.org/wiki/EPEL
-- name: Enable the optional and extras repositories for {{ansible_distribution}} {{ansible_distribution_major_version}}
-  rhsm_repository:
-    name: "{{ item }}"
-    state: enabled
-  with_items:
-    - rhel-*-optional-rpms
-    - rhel-*-extras-rpms
-  when: >
-    ansible_os_family == 'RedHat' and
-    ansible_distribution == 'RedHat' and
-    ansible_distribution_major_version == '7' and
-    epel_enable_extras_repos
-
-# Only for RedHat 8
-# reference: https://fedoraproject.org/wiki/EPEL
-- name: Enable the optional and extras repositories for {{ansible_distribution}} {{ansible_distribution_major_version}}
-  rhsm_repository:
-    name: "{{ item }}"
-    state: enabled
-  with_items:
-    - codeready-builder-for-rhel-8-*-rpms
-  when: >
-    ansible_os_family == 'RedHat' and
-    ansible_distribution == 'RedHat' and
-    ansible_distribution_major_version == '8' and
-    epel_enable_extras_repos
 
 - name: Install extra packages {{ansible_distribution}} {{ansible_distribution_major_version}}
   dnf:
@@ -96,6 +65,6 @@
   command: dnf config-manager --set-enabled powertools
   when: >
     ansible_os_family == 'RedHat' and
-    ansible_distribution == 'RedHat' and
+    ansible_distribution == 'CentOS' and
     ansible_distribution_major_version == '8' and
     epel_enable_extras_repos
