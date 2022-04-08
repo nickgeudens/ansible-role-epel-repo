@@ -24,6 +24,8 @@ This role work on RedHat, CentOS and Amazon Linux distributions
   * 8
 * Rocky Linux
   * 8
+* Oracle Linux
+  * 8
 * Amazon Linux
   * 1
   * 2

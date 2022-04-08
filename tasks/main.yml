@@ -78,12 +78,13 @@
     amazon_linux_distribution_version == 2
 
 # Installation tasks
-- name: Include tasks for installation on RedHat/CentOS distribution
+- name: Include tasks for installation on {{ansible_distribution}} distribution
   include_tasks: "install-{{ ansible_distribution|lower }}.yml"
   when: >
-    ansible_os_family == 'RedHat'
+    ansible_os_family == 'RedHat' and
+    ansible_distribution != 'Amazon'
 
-- name: Include tasks for installation on Amazon distribution
+- name: Include tasks for installation on {{ansible_distribution}} distribution
   include_tasks: "install-{{ ansible_distribution|lower }}.yml"
   when: >
     ansible_os_family == 'RedHat' and

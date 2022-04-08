@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: christiangda.epel_repo
+      vars:
+        epel_enable_extras_repos: true
+        epel_debug: true

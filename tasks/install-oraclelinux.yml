@@ -1,0 +1,35 @@
+---
+- name: Install EPEL package {{ansible_distribution}} {{ansible_distribution_major_version}}
+  dnf:
+    name: "{{ epel_package }}"
+    state: present
+  retries: "{{ epel_global_downloads_retries }}"
+  delay: "{{ epel_global_downloads_delay }}"
+  when: >
+    ansible_os_family == 'RedHat' and
+    ansible_distribution == 'OracleLinux' and
+    ansible_distribution_major_version == '8'
+
+- name: Install dnf config-manager {{ansible_distribution}} {{ansible_distribution_major_version}}
+  dnf:
+    name: 'dnf-command(config-manager)'
+    state: present
+  retries: "{{ epel_global_downloads_retries }}"
+  delay: "{{ epel_global_downloads_delay }}"
+  when: >
+    ansible_os_family == 'RedHat' and
+    ansible_distribution == 'OracleLinux' and
+    ansible_distribution_major_version == '8' and
+    epel_enable_extras_repos
+
+- name: Install extra packages {{ansible_distribution}} {{ansible_distribution_major_version}}
+  dnf:
+    name: "{{ epel_extra_packages }}"
+    state: present
+  retries: "{{ epel_global_downloads_retries }}"
+  delay: "{{ epel_global_downloads_delay }}"
+  when: >
+    ansible_os_family == 'RedHat' and
+    ansible_distribution == 'OracleLinux' and
+    ansible_distribution_major_version == '8' and
+    epel_enable_extras_repos
