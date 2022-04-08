@@ -22,6 +22,10 @@ This role work on RedHat, CentOS and Amazon Linux distributions
   * 6
   * 7
   * 8
+* Rocky Linux
+  * 8
+* Oracle Linux
+  * 8
 * Amazon Linux
   * 1
   * 2
@@ -30,9 +34,10 @@ To see the compatibility matrix of Python vs. Ansible see the project [Travis-CI
 
 ## Role Variables
 
-| Variable                        | Default Value |
-| :------------------------------ | :------------ |
-| epel_enable_redhat_extras_repos | false         |
+| Variable                              | Default Value |
+| :-------------------------------------| :------------ |
+| epel_enable_extras_repos              | false         |
+| epel_debug                            | false         |
 
 **More Details:** See the file [defaults/main.yaml](defaults/main.yaml)
 
@@ -154,8 +159,8 @@ pip install ansible-lint
 ### Clone the role repository (From your fork) and create symbolic link
 
 ```bash
-git clone https://github.com/christiangda/ansible-role-epel-repo.git
-ln -s ansible-role-awscli-configure christiangda.epel_repo
+git clone https://github.com/<your github user>/ansible-role-epel-repo.git
+ln -s ansible-role-epel-repo christiangda.epel_repo
 cd christiangda.epel_repo
 ```
 

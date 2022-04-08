@@ -1,9 +1,11 @@
 ---
 - name: Converge
   hosts: all
+  become: true
+  gather_facts: true
 
   roles:
     - role: christiangda.epel_repo
       vars:
-        epel_enable_extras_repos: false
+        epel_enable_extras_repos: true
         epel_debug: true

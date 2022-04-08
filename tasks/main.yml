@@ -1,4 +1,26 @@
 ---
+# debug
+- name: check ansible_os_family
+  debug: msg="ansible_os_family = {{ ansible_os_family }}"
+  when: epel_debug
+
+- name: check ansible_distribution
+  debug: msg="ansible_distribution = {{ ansible_distribution }}"
+  when: epel_debug
+
+- name: check ansible_distribution_major_version
+  debug: msg="ansible_distribution_major_version = {{ ansible_distribution_major_version }}"
+  when: epel_debug
+
+- name: check ansible_distribution_release
+  debug: msg="ansible_distribution_release = {{ ansible_distribution_release }}"
+  when: epel_debug
+
+- name: check ansible_virtualization_type
+  debug: msg="ansible_virtualization_type = {{ ansible_virtualization_type }}"
+  when: epel_debug
+
+
 - name: Get amazon linux version from "uname" command
   shell: >
     awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id | tr -d '"' | awk '{print $1}'
@@ -26,21 +48,16 @@
     ansible_distribution == 'Amazon' and
     amazon_linux_recipe_name_result.stdout == 'amzn2'
 
-# Selective include of vars
-- name: Include variables for CentOS/RHEL
+# Include vars
+- name: Include variables for {{ ansible_distribution|lower }}
   include_vars: "{{ item }}"
   with_first_found:
-    - "redhat.yml"
+    - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version }}.yml"
     - "main.yml"
   when: >
-    ansible_os_family == 'RedHat' and (
-      ansible_distribution == 'CentOS' or
-      ansible_distribution == 'RedHat'
-    ) and (
-      ansible_distribution_major_version == '8' or
-      ansible_distribution_major_version == '7' or
-      ansible_distribution_major_version == '6'
-    )
+    ansible_os_family == 'RedHat'
+  tags:
+    - include-vars
 
 - name: Include variables for Amazon Linux 1
   include_vars: "{{ item }}"
@@ -61,16 +78,14 @@
     amazon_linux_distribution_version == 2
 
 # Installation tasks
-- name: Include tasks for installation on RedHat/CentOS distribution
-  include_tasks: "install-{{ ansible_os_family|lower }}.yml"
+- name: Include tasks for installation on {{ansible_distribution}} distribution
+  include_tasks: "install-{{ ansible_distribution|lower }}.yml"
   when: >
-    ansible_os_family == 'RedHat' and (
-      ansible_distribution == 'CentOS' or
-      ansible_distribution == 'RedHat'
-    )
+    ansible_os_family == 'RedHat' and
+    ansible_distribution != 'Amazon'
 
-- name: Include tasks for installation on Amazon distribution
-  include_tasks: "install-{{  ansible_distribution|lower }}.yml"
+- name: Include tasks for installation on {{ansible_distribution}} distribution
+  include_tasks: "install-{{ ansible_distribution|lower }}.yml"
   when: >
     ansible_os_family == 'RedHat' and
     ansible_distribution == 'Amazon'

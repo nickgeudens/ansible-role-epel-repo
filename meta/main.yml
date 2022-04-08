@@ -1,12 +1,13 @@
 ---
 galaxy_info:
   role_name: epel_repo
+  namespace: christiangda
   author: Christian González Di Antonio
   description: Ansible Role for EPEL Repository
   issue_tracker_url: https://github.com/christiangda/ansible-role-epel-repo
   license: license GPLv3
   company: No Company Name Provided
-  min_ansible_version: 2.5
+  min_ansible_version: 2.9
 
   platforms:
     - name: EL
@@ -27,5 +28,6 @@ galaxy_info:
     - utilities
     - amazon
     - rhel
+    - rockylinux
 
 dependencies: []

@@ -4,6 +4,13 @@
 # - false
 # default value: false
 # notes:
-# * apply only to Redhat 7/8, enable/disable extra repositories
+# * apply only to Redhat 7/8, Rocky 8 enable/disable extra repositories
 # Reference: https://fedoraproject.org/wiki/EPEL
-epel_enable_redhat_extras_repos: false
+epel_enable_extras_repos: false
+
+# description: Enable the debug messages
+# possible values:
+# - true
+# - false
+# default value: false
+epel_debug: false

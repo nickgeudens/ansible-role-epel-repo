@@ -13,8 +13,8 @@ verifier:
   name: ansible
 
 scenario:
-  name: amazonlinux-1
+  name: oraclelinux-8
 
 platforms:
-  - name: amazonlinux-1
-    image: amazonlinux:1
+  - name: oraclelinux-8
+    image: oraclelinux:8
