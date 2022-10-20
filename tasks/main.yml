@@ -25,6 +25,7 @@
   shell: >
     awk -v FS="recipe_name=" 'NF>1{print $2}' /etc/image-id | tr -d '"' | awk '{print $1}'
   ignore_errors: true
+  check_mode: no
   register: amazon_linux_recipe_name_result
   when: >
     ansible_os_family == 'RedHat' and
